@@ -8,8 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  console.log(req.files.image);
-  crop.cropImage(req.files.image.data, function(err, data) {
+  crop.cropImage(req.body.image, function(err, data) {
     if (err) throw err;
     res.send(data);
   });
