@@ -6,13 +6,19 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fileUpload = require('express-fileupload');
 
+var AV = require('leanengine');
+
+AV.init({
+  appId: 'oCWHVuwhJ1qM8SkcpdraUsau-MdYXbMMI',
+  appKey: 'mjndKE3YU12Y0aOVKyo3jQPE',
+  masterKey: 'S5cRHVotx5BC0xAX3RV1HPka'
+});
+
 var index = require('./routes/index');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.use(AV.express());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -40,7 +46,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send("Server internal error.");
 });
 
 module.exports = app;
